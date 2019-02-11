@@ -4,6 +4,7 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras.preprocessing.image import ImageDataGenerator
 from keras import backend as K
+from PlotLoss import PlotLosses
 
 K.set_image_dim_ordering('th')  # color channel first
 
@@ -58,10 +59,11 @@ model.compile(loss='binary_crossentropy',
 
 model.fit_generator(
     train_generator,
-    steps_per_epoch=2000 // batch_size,
+    steps_per_epoch=20000 // batch_size,
     epochs=300,
     validation_data=validation_generator,
-    validation_steps=800 // batch_size)
+    validation_steps=800 // batch_size,
+    callbacks=[PlotLosses()])
 
 # always save your weights after training or during training
 model.save('first_try.h5')
