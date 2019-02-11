@@ -59,11 +59,11 @@ model.compile(loss='binary_crossentropy',
 
 model.fit_generator(
     train_generator,
-    steps_per_epoch=20000 // batch_size,
+    steps_per_epoch=2000 // batch_size,
     epochs=300,
     validation_data=validation_generator,
     validation_steps=800 // batch_size,
-    callbacks=[PlotLosses()])
+    callbacks=[PlotLosses(slowlyCutBeginning=False)])
 
 # always save your weights after training or during training
 model.save('first_try.h5')
